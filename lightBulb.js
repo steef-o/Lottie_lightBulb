@@ -78,7 +78,7 @@ let endFrameLightBulb = 2;
 const toggleAndreasState = {
     animation: toggleAndreas,
     container: toggleAndreasContainer,
-    on: false,
+    on: true,
     startFrame: 0,
     intermediateFrame: 25,
     endFrame: 50,

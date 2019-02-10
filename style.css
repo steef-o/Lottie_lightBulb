@@ -10,11 +10,28 @@ body{
     padding: 0;
 }
 
-#light {
+#shadows_highlights, #lightBulb{
     position: absolute;
     left: 0;
     top: 0;
+    padding: 0;
+}
+
+#light{
     z-index: -1;
     background-color: black;
     padding: 0;
+}
+
+#lightBulb{
+    z-index: 0;
+}
+
+#shadows_highlights{
+    z-index: 1;
+}
+
+/* Adjust shadow color in init. */
+#shadows_highlights svg g g:nth-child(3) path{
+     fill: rgb(25,25,25);
 }

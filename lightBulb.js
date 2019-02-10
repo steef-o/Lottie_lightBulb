@@ -2,6 +2,7 @@
 
 const lightBulbContainer = document.querySelector("#lightBulb");
 const lightContainer = document.querySelector("#light");
+const shadowsAndHighlightsContainer = document.querySelector("#shadows_highlights");
 const toggleExampleContainer = document.querySelector("#toggle-example");
 const toggleAndreasContainer = document.querySelector("#toggle-andreas");
 const toggle1Container = document.querySelector("#toggle1");
@@ -22,7 +23,7 @@ const lightbulb = lottie.loadAnimation({
     renderer: "svg",
     autoplay: false,
     loop: false,
-    path: 'animations/lightbulb_transparent.json'
+    path: 'animations/lightbulb_transparent2.json'
 });
 
 const light = lottie.loadAnimation({
@@ -31,6 +32,14 @@ const light = lottie.loadAnimation({
     autoplay: false,
     loop: false,
     path: 'animations/light_dark.json'
+});
+
+const shadowsAndHighlights = lottie.loadAnimation({
+    container: shadowsAndHighlightsContainer,
+    renderer: "svg",
+    autoplay: false,
+    loop: false,
+    path: 'animations/shadows_highlights.json'
 });
 
 const toggleExample = lottie.loadAnimation({
@@ -58,7 +67,6 @@ const toggleAndreas = lottie.loadAnimation({
 });
 
 
-
 // Global variables
 const globalActiveToggles = [];
 const globalState = {
@@ -70,7 +78,7 @@ const globalState = {
 // Init endFrame variables
 let endFrameLight = 2;
 let endFrameLightBulb = 2;
-
+let shadowAndHighlightAnimationActive = true;
 
 /********************************************************************
 ************************ ANIMATION STATS **************************
@@ -223,12 +231,12 @@ function recalculateAndRender() {
 
 function animateLightAndLightBulb() {
     // Calculate current progression: Reduce rgb values to one number.
+
     let progressReducedValue = calcProgression();
 
     // set startFrame from global state. 0 on init. Else: EndFrame.
     let startFrameLight = globalState.lightAnimationStartFrame;
     let startFrameLightBulb = globalState.lightBulbAnimationStartFrame;
-
 
     // Find direction of animation (forward or backward), calc new endFrame.
     if(startFrameLight < progressReducedValue){
@@ -238,10 +246,6 @@ function animateLightAndLightBulb() {
         endFrameLight = Math.floor(progressReducedValue / 25 );
         endFrameLightBulb = Math.floor(progressReducedValue / 7);
     }
-
-    // Make sure animation never exceeds the max amount of frames in animation.
-   // endFrameLightBulb = (endFrameLightBulb >= 100) ? 100 : endFrameLightBulb;
-   // endFrameLight = (endFrameLight >= 100) ? 100 : endFrameLight;
 
     // set valid endFrames if value is outside animation length.
     if(endFrameLightBulb >= 100){
@@ -259,17 +263,27 @@ function animateLightAndLightBulb() {
         endFrameLight = 2;
     }
 
-    console.log("startFrameLight" + startFrameLight);
-    console.log("startFrameLightBulb" + startFrameLightBulb);
-    console.log("endFrameLight" + endFrameLight);
-    console.log("endFrameLightBulb" + endFrameLightBulb);
-    console.log(globalState.color);
+    //DEBUG
+  //  console.log("startFrameLight" + startFrameLight);
+  //  console.log("startFrameLightBulb" + startFrameLightBulb);
+  //  console.log("endFrameLight" + endFrameLight);
+  //  console.log("endFrameLightBulb" + endFrameLightBulb);
+  //  console.log(globalState.color);
 
     // Check if start and end frame are the same, if they are do not animate.
     if(startFrameLightBulb !== endFrameLightBulb){
         lightbulb.playSegments([startFrameLightBulb, endFrameLightBulb]);
         lightbulb.setSpeed(3);
         light.playSegments([startFrameLight, endFrameLight]);
+
+        if(startFrameLight >= 5 && shadowAndHighlightAnimationActive){
+            shadowsAndHighlights.playSegments([1,4]);
+            shadowAndHighlightAnimationActive = false;
+        }
+        if(endFrameLight === 5){
+            shadowsAndHighlights.playSegments([4,1]);
+            shadowAndHighlightAnimationActive = true;
+        }
     }
     // Update current frame of animation to globalState object.
     globalState.lightAnimationStartFrame = endFrameLight;
@@ -280,6 +294,7 @@ function animateLightAndLightBulb() {
 function calcProgression() {
     return globalState.color
         .split(',')
-        .map((value) => parseInt(value,10))
+        .map((value) => parseInt(value, 10))
         .reduce((total, num) => total + num);
 }
+

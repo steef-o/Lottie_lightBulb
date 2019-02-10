@@ -1,0 +1,20 @@
+#toggle-andreas{
+    transform: rotateY(180deg);
+}
+
+body{
+    line-height: 0;
+}
+
+#lightBulb{
+    padding: 0;
+}
+
+#light {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-color: black;
+    padding: 0;
+}

@@ -67,7 +67,7 @@ const toggleAndreas = lottie.loadAnimation({
 });
 
 
-// Global variables
+/**************************** Global variables***************************/
 const globalActiveToggles = [];
 const globalState = {
     color: "0,0,0",
@@ -78,6 +78,8 @@ const globalState = {
 // Init endFrame variables
 let endFrameLight = 2;
 let endFrameLightBulb = 2;
+
+// Shadows and Highlights state
 let shadowAndHighlightAnimationActive = true;
 
 /********************************************************************
@@ -226,12 +228,10 @@ function recalculateAndRender() {
     animateLightAndLightBulb();
 
    // console.log("new global color" + globalState.color);
-   // console.log(" ");
 }
 
 function animateLightAndLightBulb() {
     // Calculate current progression: Reduce rgb values to one number.
-
     let progressReducedValue = calcProgression();
 
     // set startFrame from global state. 0 on init. Else: EndFrame.
@@ -248,27 +248,16 @@ function animateLightAndLightBulb() {
     }
 
     // set valid endFrames if value is outside animation length.
-    if(endFrameLightBulb >= 100){
-        endFrameLightBulb = 100;
-    }
-
-    if(endFrameLightBulb <= 0){
-        endFrameLightBulb = 2;
-    }
-
-    if(endFrameLight >= 100){
-        endFrameLight = 100;
-    }
-    if(endFrameLight <= 0){
-        endFrameLight = 2;
-    }
+    endFrameLightBulb = (endFrameLightBulb >= 100) ? 100 : endFrameLightBulb;
+    endFrameLightBulb = (endFrameLightBulb <= 0) ? 2 : endFrameLightBulb;
+    endFrameLight = (endFrameLight >= 100) ? 100 : endFrameLight;
+    endFrameLight = (endFrameLight <= 0) ? 2 : endFrameLight;
 
     //DEBUG
   //  console.log("startFrameLight" + startFrameLight);
   //  console.log("startFrameLightBulb" + startFrameLightBulb);
   //  console.log("endFrameLight" + endFrameLight);
   //  console.log("endFrameLightBulb" + endFrameLightBulb);
-  //  console.log(globalState.color);
 
     // Check if start and end frame are the same, if they are do not animate.
     if(startFrameLightBulb !== endFrameLightBulb){

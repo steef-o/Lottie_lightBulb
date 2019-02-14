@@ -42,16 +42,10 @@ const shadowsAndHighlights = lottie.loadAnimation({
     path: 'animations/shadows_highlights.json'
 });
 
+/***  TOGGLES ***/
+
 const toggleExample = lottie.loadAnimation({
     container: toggleExampleContainer,
-    renderer: 'svg',
-    autoplay: false,
-    loop: false,
-    path: "animations/toggle-example.json"
-});
-
-const toggle1 = lottie.loadAnimation({
-    container: toggle1Container,
     renderer: 'svg',
     autoplay: false,
     loop: false,
@@ -67,6 +61,73 @@ const toggleAndreas = lottie.loadAnimation({
 });
 
 
+const toggle1 = lottie.loadAnimation({
+    container: toggle1Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle-example.json"
+});
+ /*
+const toggle2= lottie.loadAnimation({
+    container: toggle2Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle2.json"
+});
+const toggle3 = lottie.loadAnimation({
+    container: toggle3Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle3.json"
+});
+const toggle4= lottie.loadAnimation({
+    container: toggle4Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle4.json"
+});
+const toggle5 = lottie.loadAnimation({
+    container: toggle5Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle5.json"
+});
+const toggle6 = lottie.loadAnimation({
+    container: toggle6Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle6.json"
+});
+
+const toggle7 = lottie.loadAnimation({
+    container: toggle7Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle7.json"
+});
+const toggle8 = lottie.loadAnimation({
+    container: toggle8Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle8.json"
+});
+const toggle9 = lottie.loadAnimation({
+    container: toggle9Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle9.json"
+});
+
+*/
 /**************************** Global variables***************************/
 const globalActiveToggles = [];
 const globalState = {
@@ -118,6 +179,103 @@ const toggle1State = {
     name: "toggle1"
 };
 
+/*
+const toggle2State = {
+    animation: toggle2,
+    container: toggle2Container,
+    on: false,
+    startFrame: 0,
+    // intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "0,0,0",
+    name: "toggle2"
+};
+
+const toggle3State = {
+    animation: toggle3,
+    container: toggle3Container,
+    on: false,
+    startFrame: 0,
+    // intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "0,0,0",
+    name: "toggle3"
+};
+
+const toggle4State = {
+    animation: toggle4,
+    container: toggle4Container,
+    on: false,
+    startFrame: 0,
+    // intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "0,0,0",
+    name: "toggle4"
+};
+
+const toggle5State = {
+    animation: toggle5,
+    container: toggle5Container,
+    on: false,
+    startFrame: 0,
+    // intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "0,0,0",
+    name: "toggle5"
+};
+
+const toggle6State = {
+    animation: toggle6,
+    container: toggle6Container,
+    on: false,
+    startFrame: 0,
+    // intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "0,0,0",
+    name: "toggle6"
+};
+
+const toggle7State = {
+    animation: toggle7,
+    container: toggle7Container,
+    on: false,
+    startFrame: 0,
+    // intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "0,0,0",
+    name: "toggle7"
+};
+
+const toggle8State = {
+    animation: toggle8,
+    container: toggle8Container,
+    on: false,
+    startFrame: 0,
+    // intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "0,0,0",
+    name: "toggle8"
+};
+
+const toggle9State = {
+    animation: toggle9,
+    container: toggle9Container,
+    on: false,
+    startFrame: 0,
+    // intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "0,0,0",
+    name: "toggle9"
+};
+*/
 
 /************************************************************
 * ***************************LOGIC***************************
@@ -194,7 +352,7 @@ function addColor(color1, color2){
 
     //Loop Through RGB, check if numbers are higher than 255, add together values r+r, g+g ,b+b
     for(let i = 0; i <= 2 ;i++ ){
-        if(rgb1Array[i] <= 255 && rgb2Array <= 255 || (rgb1Array[i] + rgb2Array[i]) <= 255){
+        if(rgb1Array[i] <= 255 && rgb2Array <= 255 || (rgb1Array[i] + rgb2Array[i]) - 45 <= 255){
             // last number is value of dim light.
             newColorArray[i] = rgb1Array[i] + rgb2Array[i] - 45;
         }else{

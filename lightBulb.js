@@ -92,7 +92,7 @@ const toggleAndreasState = {
     startFrame: 0,
     intermediateFrame: 25,
     endFrame: 50,
-    color: "100,0,0",
+    color: "145,45,45",
     name: "toggleAndreas"
 };
 
@@ -103,7 +103,7 @@ const toggleExampleState = {
     startFrame: 0,
     endFrame: 51,
     speed: 2.5,
-    color: "80,180,0",
+    color: "125,225,45",
     name: "toggleExample"
 };
 
@@ -114,7 +114,7 @@ const toggle1State = {
     startFrame: 0,
     endFrame: 51,
     speed: 2.5,
-    color: "23,65,180",
+    color: "68,110,225",
     name: "toggle1"
 };
 
@@ -195,7 +195,8 @@ function addColor(color1, color2){
     //Loop Through RGB, check if numbers are higher than 255, add together values r+r, g+g ,b+b
     for(let i = 0; i <= 2 ;i++ ){
         if(rgb1Array[i] <= 255 && rgb2Array <= 255 || (rgb1Array[i] + rgb2Array[i]) <= 255){
-            newColorArray[i] = rgb1Array[i] + rgb2Array[i];
+            // last number is value of dim light.
+            newColorArray[i] = rgb1Array[i] + rgb2Array[i] - 45;
         }else{
             newColorArray[i] = 255;
         }

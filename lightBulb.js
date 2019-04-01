@@ -3,6 +3,7 @@
 const lightBulbContainer = document.querySelector("#lightBulb");
 const lightContainer = document.querySelector("#light");
 const shadowsAndHighlightsContainer = document.querySelector("#shadows_highlights");
+
 const toggleExampleContainer = document.querySelector("#toggle-example");
 const toggleAndreasContainer = document.querySelector("#toggle-andreas");
 const toggle1Container = document.querySelector("#toggle1");
@@ -152,7 +153,7 @@ let endFrameLightBulb = 2;
 let shadowAndHighlightAnimationActive = true;
 
 /********************************************************************
-************************ ANIMATION STATS **************************
+************************ ANIMATION STATES **************************
  ********************************************************************/
 const toggleAndreasState = {
     animation: toggleAndreas,
@@ -325,8 +326,9 @@ flipSwitch(toggle10State);
 function flipSwitch(state) {
     // Check in animation is ready.
     state.animation.addEventListener("data_ready", function () {
-        // listen for click event.
+        // Set custom speed or default value.
         state.animation.setSpeed(state.speed || 1);
+        // listen for click event.
         state.container.addEventListener("click", function () {
             // Check in animation contains intermediate frame.
             // change state of toggle. play animation, add or remove from globalActiveToggles array, update state.
@@ -353,7 +355,7 @@ function flipSwitch(state) {
             }
             recalculateAndRender();
         }); // click listener.
-    }); // DOMLoaded listener.
+    }); // data_ready listener.
 }
 
 // add state object to globalActiveToggles array

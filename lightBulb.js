@@ -14,6 +14,7 @@ const toggle6Container = document.querySelector("#toggle6");
 const toggle7Container = document.querySelector("#toggle7");
 const toggle8Container = document.querySelector("#toggle8");
 const toggle9Container = document.querySelector("#toggle9");
+const toggle10Container = document.querySelector("#toggle10");
 
 /*************************************************************************
 **********************   LOTTIE ANIMATION INIT ***************************
@@ -60,22 +61,22 @@ const toggleAndreas = lottie.loadAnimation({
     path: "animations/toggle-andreas.json"
 });
 
-
 const toggle1 = lottie.loadAnimation({
     container: toggle1Container,
     renderer: 'svg',
     autoplay: false,
     loop: false,
-    path: "animations/toggle-example.json"
+    path: "animations/edvardikken.json"
 });
- /*
-const toggle2= lottie.loadAnimation({
+
+const toggle2 = lottie.loadAnimation({
     container: toggle2Container,
     renderer: 'svg',
     autoplay: false,
     loop: false,
     path: "animations/toggle2.json"
 });
+
 const toggle3 = lottie.loadAnimation({
     container: toggle3Container,
     renderer: 'svg',
@@ -127,7 +128,14 @@ const toggle9 = lottie.loadAnimation({
     path: "animations/toggle9.json"
 });
 
-*/
+const toggle10 = lottie.loadAnimation({
+    container: toggle10Container,
+    renderer: 'svg',
+    autoplay: false,
+    loop: false,
+    path: "animations/toggle10.json"
+});
+
 /**************************** Global variables***************************/
 const globalActiveToggles = [];
 const globalState = {
@@ -149,7 +157,7 @@ let shadowAndHighlightAnimationActive = true;
 const toggleAndreasState = {
     animation: toggleAndreas,
     container: toggleAndreasContainer,
-    on: true,
+    on: false,
     startFrame: 0,
     intermediateFrame: 25,
     endFrame: 50,
@@ -173,22 +181,23 @@ const toggle1State = {
     container: toggle1Container,
     on: false,
     startFrame: 0,
+    intermediateFrame: 25,
     endFrame: 51,
     speed: 2.5,
     color: "68,110,225",
     name: "toggle1"
 };
 
-/*
+
 const toggle2State = {
     animation: toggle2,
     container: toggle2Container,
     on: false,
     startFrame: 0,
-    // intermediateFrame: 25,
+    intermediateFrame: 25,
     endFrame: 50,
-    speed: 1,
-    color: "0,0,0",
+    speed: 3.5,
+    color: "43,32,159",
     name: "toggle2"
 };
 
@@ -197,10 +206,10 @@ const toggle3State = {
     container: toggle3Container,
     on: false,
     startFrame: 0,
-    // intermediateFrame: 25,
+    intermediateFrame: 25,
     endFrame: 50,
     speed: 1,
-    color: "0,0,0",
+    color: "56,8,167",
     name: "toggle3"
 };
 
@@ -209,10 +218,10 @@ const toggle4State = {
     container: toggle4Container,
     on: false,
     startFrame: 0,
-    // intermediateFrame: 25,
+    intermediateFrame: 25,
     endFrame: 50,
     speed: 1,
-    color: "0,0,0",
+    color: "136,85,20",
     name: "toggle4"
 };
 
@@ -221,10 +230,10 @@ const toggle5State = {
     container: toggle5Container,
     on: false,
     startFrame: 0,
-    // intermediateFrame: 25,
+    intermediateFrame: 25,
     endFrame: 50,
     speed: 1,
-    color: "0,0,0",
+    color: "186,218,85",
     name: "toggle5"
 };
 
@@ -233,10 +242,10 @@ const toggle6State = {
     container: toggle6Container,
     on: false,
     startFrame: 0,
-    // intermediateFrame: 25,
+    intermediateFrame: 25,
     endFrame: 50,
     speed: 1,
-    color: "0,0,0",
+    color: "251,149,209",
     name: "toggle6"
 };
 
@@ -245,10 +254,10 @@ const toggle7State = {
     container: toggle7Container,
     on: false,
     startFrame: 0,
-    // intermediateFrame: 25,
+    intermediateFrame: 25,
     endFrame: 50,
     speed: 1,
-    color: "0,0,0",
+    color: "69,239,236",
     name: "toggle7"
 };
 
@@ -257,10 +266,10 @@ const toggle8State = {
     container: toggle8Container,
     on: false,
     startFrame: 0,
-    // intermediateFrame: 25,
+    intermediateFrame: 25,
     endFrame: 50,
     speed: 1,
-    color: "0,0,0",
+    color: "79,183,138",
     name: "toggle8"
 };
 
@@ -269,13 +278,25 @@ const toggle9State = {
     container: toggle9Container,
     on: false,
     startFrame: 0,
-    // intermediateFrame: 25,
+    intermediateFrame: 25,
     endFrame: 50,
     speed: 1,
-    color: "0,0,0",
+    color: "236,21,248",
     name: "toggle9"
 };
-*/
+
+const toggle10State = {
+    animation: toggle10,
+    container: toggle10Container,
+    on: false,
+    startFrame: 0,
+    intermediateFrame: 25,
+    endFrame: 50,
+    speed: 1,
+    color: "77,1,138",
+    name: "toggle10"
+};
+
 
 /************************************************************
 * ***************************LOGIC***************************
@@ -290,34 +311,46 @@ light.addEventListener("DOMLoaded", function () {
 flipSwitch(toggleAndreasState);
 flipSwitch(toggleExampleState);
 flipSwitch(toggle1State);
+flipSwitch(toggle2State);
+flipSwitch(toggle3State);
+flipSwitch(toggle4State);
+flipSwitch(toggle5State);
+flipSwitch(toggle6State);
+flipSwitch(toggle7State);
+flipSwitch(toggle8State);
+flipSwitch(toggle9State);
+flipSwitch(toggle10State);
 
 
 function flipSwitch(state) {
     // Check in animation is ready.
     state.animation.addEventListener("data_ready", function () {
         // listen for click event.
+        state.animation.setSpeed(state.speed || 1);
+        //state.animation.goToAndStop(0, true);
+       // state.animation.segments.length = state.endFrame;
+        console.log(state.animation);
         state.container.addEventListener("click", function () {
-            state.animation.setSpeed(state.speed || 1);
-
             // Check in animation contains intermediate frame.
             // change state of toggle. play animation, add or remove from globalActiveToggles array, update state.
+            console.log(state.animation);
             if (state.intermediateFrame) {
                 if (state.on) {
-                    state.animation.playSegments([state.startFrame, state.intermediateFrame]);
+                    state.animation.playSegments([state.intermediateFrame, state.endFrame], true);
                     removeFromActiveToggles(state);
                     state.on = false;
                 } else {
-                    state.animation.playSegments([state.intermediateFrame, state.endFrame]);
+                    state.animation.playSegments([state.startFrame, state.intermediateFrame],true);
                     addToActiveToggles(state);
                     state.on = true;
                 }
             } else {
                 if (state.on) {
-                    state.animation.playSegments([state.endFrame, state.startFrame]);
+                    state.animation.playSegments([state.endFrame, state.startFrame], true);
                     removeFromActiveToggles(state);
                     state.on = false;
                 } else {
-                    state.animation.playSegments([state.startFrame, state.endFrame]);
+                    state.animation.playSegments([state.startFrame, state.endFrame], true);
                     addToActiveToggles(state);
                     state.on = true;
                 }
@@ -420,16 +453,16 @@ function animateLightAndLightBulb() {
 
     // Check if start and end frame are the same, if they are do not animate.
     if(startFrameLightBulb !== endFrameLightBulb){
-        lightbulb.playSegments([startFrameLightBulb, endFrameLightBulb]);
+        lightbulb.playSegments([startFrameLightBulb, endFrameLightBulb],true);
         lightbulb.setSpeed(3);
-        light.playSegments([startFrameLight, endFrameLight]);
+        light.playSegments([startFrameLight, endFrameLight],true);
 
         if(startFrameLight >= 5 && shadowAndHighlightAnimationActive){
-            shadowsAndHighlights.playSegments([1,4]);
+            shadowsAndHighlights.playSegments([1,4],true);
             shadowAndHighlightAnimationActive = false;
         }
         if(endFrameLight === 5){
-            shadowsAndHighlights.playSegments([4,1]);
+            shadowsAndHighlights.playSegments([4,1], true);
             shadowAndHighlightAnimationActive = true;
         }
     }

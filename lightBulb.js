@@ -182,7 +182,7 @@ const toggle1State = {
     on: false,
     startFrame: 0,
     intermediateFrame: 25,
-    endFrame: 51,
+    endFrame: 60,
     speed: 2.5,
     color: "68,110,225",
     name: "toggle1"

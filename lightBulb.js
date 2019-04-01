@@ -327,13 +327,9 @@ function flipSwitch(state) {
     state.animation.addEventListener("data_ready", function () {
         // listen for click event.
         state.animation.setSpeed(state.speed || 1);
-        //state.animation.goToAndStop(0, true);
-       // state.animation.segments.length = state.endFrame;
-        console.log(state.animation);
         state.container.addEventListener("click", function () {
             // Check in animation contains intermediate frame.
             // change state of toggle. play animation, add or remove from globalActiveToggles array, update state.
-            console.log(state.animation);
             if (state.intermediateFrame) {
                 if (state.on) {
                     state.animation.playSegments([state.intermediateFrame, state.endFrame], true);

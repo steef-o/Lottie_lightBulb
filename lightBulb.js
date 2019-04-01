@@ -182,7 +182,7 @@ const toggle1State = {
     container: toggle1Container,
     on: false,
     startFrame: 0,
-    intermediateFrame: 25,
+    intermediateFrame: 29,
     endFrame: 60,
     speed: 2.5,
     color: "68,110,225",
@@ -324,7 +324,7 @@ flipSwitch(toggle10State);
 
 
 function flipSwitch(state) {
-    // Check in animation is ready.
+    // Check if animation is ready.
     state.animation.addEventListener("data_ready", function () {
         // Set custom speed or default value.
         state.animation.setSpeed(state.speed || 1);
